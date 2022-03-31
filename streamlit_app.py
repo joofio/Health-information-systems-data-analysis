@@ -67,7 +67,21 @@ options = ncol1.multiselect("Filtrar por Empresa (NIF):", empresas, None)
 
 
 if len(options) == 0:
-    show_data = data
+    show_data = data[
+        "Objeto do Contrato",
+        "Tipo de Prodecimento",
+        "Tipo(s) de Contrato",
+        "CPV Designação",
+        "CPV Valor",
+        "Preço Contratual",
+        "Preço Total Efetivo",
+        "Data de Publicação",
+        "Data de Celebracao do Contrato",
+        "Prazo de Execução",
+        "Fundamentação",
+        "Procedimento Centralizado",
+        "Nome_tratado",
+    ]
 
 else:
     show_data = data[data["Nome_tratado"].isin(options)]
