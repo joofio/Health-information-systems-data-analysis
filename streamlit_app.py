@@ -76,6 +76,8 @@ view_col = [
     "Data de Publicação",
     "Data de Celebração do Contrato",
     "Prazo de Execução",
+    "Prazo_execução_nr",
+    "Valor_Dia",
     "Fundamentação",
     "Procedimento Centralizado",
     "Nome_tratado",
@@ -105,6 +107,6 @@ fig = px.bar(
     show_data,
     x="Data de Celebração do Contrato",
     y="CPV_VALOR_TRIM",
-    hover_data=["Objeto do Contrato"],
+    hover_data=["Objeto do Contrato", "Valor_Dia"],
 )
 st.plotly_chart(fig, use_container_width=True)
