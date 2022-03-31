@@ -18,7 +18,6 @@ def value_human_readable(x):
 
 
 def create_dataframe(data, min_val, min_date):
-    min_date = pd.to_datetime(min_date)
     top_x_clean = (
         data[data["Data de Celebração do Contrato"] > min_date]
         .groupby("Nome_tratado")
@@ -51,7 +50,7 @@ st.markdown(""" etc etc""")
 vcol1, vcol2 = st.columns(2)
 
 
-min_date = vcol1.date_input("Limite Minimo", value=datetime(2014, 1, 1))
+min_date = pd.to_datetime(vcol1.date_input("Limite Minimo", value=datetime(2014, 1, 1)))
 min_val = vcol2.slider("Pick a minimum Ratio view per document", 1, 50, 20)
 
 st.dataframe(create_dataframe(data, min_val, min_date))
@@ -82,11 +81,20 @@ view_col = [
     "Nome_tratado",
     "CPV_VALOR_TRIM",
 ]
-if len(options) == 0:
-    show_data = data[view_col]
 
+if len(options) == 0:
+    if min_date:
+        show_data = data[data["Data de Celebração do Contrato"] > min_date][view_col]
+    else:
+        show_data = data[view_col]
 else:
-    show_data = data[data["Nome_tratado"].isin(options)][view_col]
+    if min_date:
+        show_data = data[
+            (data["Nome_tratado"].isin(options))
+            & (data["Data de Celebração do Contrato"] > min_date)
+        ][view_col]
+    else:
+        show_data = data[data["Nome_tratado"].isin(options)][view_col]
 
 ncol2.metric("Rows", len(show_data))
 ncol3.metric("total Money", f'{round(show_data["CPV_VALOR_TRIM"].sum(), 2):,}')
