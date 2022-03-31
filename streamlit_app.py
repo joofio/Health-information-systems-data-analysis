@@ -78,5 +78,10 @@ ncol3.metric("total Money", round(show_data["CPV_VALOR_TRIM"].sum(), 2))
 st.dataframe(show_data)
 
 
-fig = px.bar(show_data, x="Data de Celebração do Contrato", y="CPV_VALOR_TRIM")
+fig = px.bar(
+    show_data,
+    x="Data de Celebração do Contrato",
+    y="CPV_VALOR_TRIM",
+    hover_data=["Objeto do Contrato"],
+)
 st.plotly_chart(fig, use_container_width=True)
