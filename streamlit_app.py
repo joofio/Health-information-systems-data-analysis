@@ -69,6 +69,7 @@ view_col = [
     "Objeto do Contrato",
     "Tipo de Procedimento",
     "Tipo(s) de Contrato",
+    "CPV",
     "CPV Designação",
     "CPV Valor",
     "Preço Contratual",
