@@ -89,7 +89,7 @@ else:
     show_data = data[data["Nome_tratado"].isin(options)][view_col]
 
 ncol2.metric("Rows", len(show_data))
-ncol3.metric("total Money", round(show_data["CPV_VALOR_TRIM"].sum(), 2))
+ncol3.metric("total Money", f'{round(show_data["CPV_VALOR_TRIM"].sum(), 2):,}')
 st.dataframe(show_data)
 
 
