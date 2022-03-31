@@ -65,28 +65,28 @@ empresas = list(data["Nome_tratado"].unique())
 
 options = ncol1.multiselect("Filtrar por Empresa (NIF):", empresas, None)
 
-
+view_col = [
+    "Objeto do Contrato",
+    "Tipo de Procedimento",
+    "Tipo(s) de Contrato",
+    "CPV Designação",
+    "CPV Valor",
+    "Preço Contratual",
+    "Preço Total Efetivo",
+    "Data de Publicação",
+    "Data de Celebração do Contrato",
+    "Prazo de Execução",
+    "Fundamentação",
+    "Procedimento Centralizado",
+    "Nome_tratado",
+    "CPV_VALOR_TRIM",
+]
 if len(options) == 0:
-    show_data = data[
-        "Objeto do Contrato",
-        "Tipo de Prodecimento",
-        "Tipo(s) de Contrato",
-        "CPV Designação",
-        "CPV Valor",
-        "Preço Contratual",
-        "Preço Total Efetivo",
-        "Data de Publicação",
-        "Data de Celebracao do Contrato",
-        "Prazo de Execução",
-        "Fundamentação",
-        "Procedimento Centralizado",
-        "Nome_tratado",
-    ]
+    show_data = data[view_col]
 
 else:
-    show_data = data[data["Nome_tratado"].isin(options)]
+    show_data = data[data["Nome_tratado"].isin(options)][view_col]
 
-print(show_data)
 ncol2.metric("Rows", len(show_data))
 ncol3.metric("total Money", round(show_data["CPV_VALOR_TRIM"].sum(), 2))
 st.dataframe(show_data)
